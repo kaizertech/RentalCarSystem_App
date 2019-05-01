@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RentalCarSystem.Models
 {
-    public class BaseEntitiy
+    public abstract class BaseEntitiy
     {
         public DateTime? CreatedDate { get; set; }
 

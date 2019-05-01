@@ -7,10 +7,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RentalCarSystem.Models
 {
-    public class Cars : BaseEntitiy
+    public class Cars 
     {
+        public Cars()
+        {
+            this.Transactions = new List<Transactions>();
+        }
         [Key]
         public int Araba_ID { get; set; }
+
+        public int Sirket_id { get; set; }
 
         public string Araba_Ad { get; set; }
 
@@ -26,7 +32,9 @@ namespace RentalCarSystem.Models
 
         public int Araba_GunlukKira { get; set; }
 
-        public Companies Companies { get; set; }
+        public virtual Companies Companies { get; set; }
+        public virtual ICollection<Transactions> Transactions { get; set; }
+
 
     }
 }

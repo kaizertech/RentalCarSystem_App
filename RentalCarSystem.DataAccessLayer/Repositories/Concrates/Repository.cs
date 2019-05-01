@@ -5,32 +5,39 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using System.Data.Entity.Infrastructure;
 
 namespace RentalCarSystem.DataAccessLayer.Repositories.Concrates
 {
+    /// <summary>
+    /// EntityFramework için hazırlıyor olduğumuz bu repositoriyi daha önceden tasarladığımız generic repositorimiz olan IRepository arayüzünü implemente ederek tasarladık.
+    /// Bu şekilde tasarlamamızın ana sebebi ise veritabanına independent(bağımsız) bir durumda kalabilmek. Örneğin MongoDB için ise ilgili provider'ı aracılığı ile MongoDBRepository tasarlayabiliriz.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected DbContext _contentext;
-        private DbSet<TEntity> _dbSet;
+        private readonly DbContext _dbContext;
+        private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(DbContext context)
+        public Repository(CustomerContext dbContext)
         {
-            _contentext = context;
-            _dbSet = _contentext.Set<TEntity>();
-        }
-        public void Add(TEntity entity)
-        {
-            _dbSet.Add(entity);
-        }
+            if (dbContext == null)
+                throw new ArgumentNullException("dbContext can not be null.");
 
-        public void AddRange(IEnumerable<TEntity> entities)
-        {
-            _dbSet.AddRange(entities);
+            _dbContext = dbContext;
+            _dbSet = dbContext.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetAll()
+        #region IRepository Members
+        public IQueryable<TEntity> GetAll()
         {
-            return _dbSet.ToList();
+            return _dbSet;
+        }
+
+        public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _dbSet.Where(predicate);
         }
 
         public TEntity GetById(int id)
@@ -38,13 +45,72 @@ namespace RentalCarSystem.DataAccessLayer.Repositories.Concrates
             return _dbSet.Find(id);
         }
 
-        public void Remove(int id)
+        public TEntity Get(Expression<Func<TEntity, bool>> predicate)
         {
-            _dbSet.Remove(GetById(id));
+            return _dbSet.Where(predicate).SingleOrDefault();
         }
-        public void RemoveRange(IEnumerable<TEntity> entities)
+
+        public void Add(TEntity entity)
         {
-            _dbSet.RemoveRange(entities);
+            _dbSet.Add(entity);
         }
+
+        public void Update(TEntity entity)
+        {
+            _dbSet.Attach(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void Delete(TEntity entity)
+        {
+            // Eğer sizlerde genelde bir kayıtı silmek yerine IsDelete şeklinde bool bir flag alanı tutuyorsanız,
+            // Küçük bir refleciton kodu yardımı ile bunuda otomatikleştirebiliriz.
+            if (entity.GetType().GetProperty("IsDelete") != null)
+            {
+                TEntity _entity = entity;
+
+                _entity.GetType().GetProperty("IsDelete").SetValue(_entity, true);
+
+                this.Update(_entity);
+            }
+            else
+            {
+                // Önce entity'nin state'ini kontrol etmeliyiz.
+                 DbEntityEntry dbEntityEntry = _dbContext.Entry(entity);
+
+                if (dbEntityEntry.State != EntityState.Deleted)
+                {
+                    dbEntityEntry.State = EntityState.Deleted;
+                }
+                else
+                {
+                    _dbSet.Attach(entity);
+                    _dbSet.Remove(entity);
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var entity = GetById(id);
+            if (entity == null) return;
+            else
+            {
+                if (entity.GetType().GetProperty("IsDelete") != null)
+                {
+                    TEntity _entity = entity;
+                    _entity.GetType().GetProperty("IsDelete").SetValue(_entity, true);
+
+                    this.Update(_entity);
+                }
+                else
+                {
+                    Delete(entity);
+                }
+            }
+        }
+        #endregion
     }
 }
+
+

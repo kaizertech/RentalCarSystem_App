@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 namespace RentalCarSystem.Models
 {
-    public class Companies : BaseEntitiy
+    public class Companies 
     {
         public Companies()
         {
-            Cars = new List<Cars>();
+            this.Cars = new List<Cars>();
         }
 
         [Key]
@@ -26,7 +26,7 @@ namespace RentalCarSystem.Models
 
         public int SirketPuan { get; set; }
 
-        public ICollection<Cars> Cars { get; set; }
+        public virtual ICollection<Cars> Cars { get; set; }
     }
 
 }

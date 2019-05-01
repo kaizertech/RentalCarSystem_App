@@ -9,11 +9,7 @@ namespace RentalCarSystem.BusinessLogic.Abstactions
 {
     public interface IUnitOfWork : IDisposable
     {
-        ICarsRepository CarsRepository { get; }
-        ICompaniesRepository CompaniesRepository { get; }
-        ICustomersRepository CustomersRepository { get; }
-        ITransactionsRepository TransactionsRepository { get; }
-
-        int Complate();
+        IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
+        int SaveChanges();
     }
 }

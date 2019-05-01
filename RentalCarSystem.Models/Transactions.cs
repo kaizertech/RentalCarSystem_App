@@ -9,10 +9,13 @@ namespace RentalCarSystem.Models
 {
     public class Transactions : BaseEntitiy
     {
+       
         [Key]
-        public int Musteri_ID { get; set; }
+        public int Kiralama_ID { get; set; }
 
-        public int Araba_ID { get; set; }
+        public int Musteri_id { get; set; }
+
+        public int Araba_id { get; set; }
 
         public DateTime BaslangicTarihi { get; set; }
 
@@ -24,8 +27,8 @@ namespace RentalCarSystem.Models
 
         public decimal Ucret { get; set; }
 
-        public Customers Customers{ get; set; }
 
-        public Cars Cars { get; set; }
+        public virtual Customers Customers { get; set; }
+        public virtual Cars Cars { get; set; }
     }
 }

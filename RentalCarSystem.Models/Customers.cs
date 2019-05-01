@@ -11,7 +11,7 @@ namespace RentalCarSystem.Models
     {
         public Customers()
         {
-            Transactions = new List<Transactions>();
+            this.Transactions = new List<Transactions>();
         }
         [Key]
         public int Musteri_ID { get; set; }
@@ -26,7 +26,8 @@ namespace RentalCarSystem.Models
 
         public string Musteri_Sifre { get; set; }
 
-        public ICollection<Transactions> Transactions { get; set; }
+        public virtual ICollection<Transactions> Transactions { get; set; }
 
+        
     }
 }

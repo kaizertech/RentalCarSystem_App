@@ -21,5 +21,29 @@ namespace RentalCarSystem.DataAccessLayer
         public DbSet<Customers> Customers { get; set; }
 
         public DbSet<Transactions> Transactions { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+
+            // Veri tabanı ilişkileri kurma çelınç :D
+            modelBuilder.Entity<Transactions>()
+                .HasRequired<Customers>(x => x.Customers)
+                .WithMany(x => x.Transactions)
+                .HasForeignKey(x => x.Musteri_id);
+
+            modelBuilder.Entity<Transactions>()
+                .HasRequired<Cars>(x => x.Cars)
+                .WithMany(x => x.Transactions)
+                .HasForeignKey(x => x.Araba_id);
+
+            modelBuilder.Entity<Cars>()
+                .HasRequired<Companies>(x => x.Companies)
+                .WithMany(x => x.Cars)
+                .HasForeignKey(x => x.Sirket_id);
+                
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }
