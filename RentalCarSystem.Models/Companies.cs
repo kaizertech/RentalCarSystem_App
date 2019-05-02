@@ -8,11 +8,7 @@ namespace RentalCarSystem.Models
 {
     public class Companies 
     {
-        public Companies()
-        {
-            this.Cars = new List<Cars>();
-        }
-
+        
         [Key]
         public int Sirket_ID { get; set; }
 
@@ -26,7 +22,7 @@ namespace RentalCarSystem.Models
 
         public int SirketPuan { get; set; }
 
-        public virtual ICollection<Cars> Cars { get; set; }
+        
     }
 
 }

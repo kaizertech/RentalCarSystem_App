@@ -22,7 +22,7 @@ namespace RentalCarSystem.DataAccessLayer
 
         public DbSet<Transactions> Transactions { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
             // Veri tabanı ilişkileri kurma çelınç :D
@@ -43,7 +43,7 @@ namespace RentalCarSystem.DataAccessLayer
                 
 
             base.OnModelCreating(modelBuilder);
-        }
+        }*/
 
     }
 }

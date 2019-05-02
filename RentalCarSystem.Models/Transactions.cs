@@ -28,7 +28,6 @@ namespace RentalCarSystem.Models
         public decimal Ucret { get; set; }
 
 
-        public virtual Customers Customers { get; set; }
-        public virtual Cars Cars { get; set; }
+        
     }
 }

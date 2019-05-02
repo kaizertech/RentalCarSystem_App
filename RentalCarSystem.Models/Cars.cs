@@ -9,10 +9,7 @@ namespace RentalCarSystem.Models
 {
     public class Cars 
     {
-        public Cars()
-        {
-            this.Transactions = new List<Transactions>();
-        }
+       
         [Key]
         public int Araba_ID { get; set; }
 
@@ -32,9 +29,7 @@ namespace RentalCarSystem.Models
 
         public int Araba_GunlukKira { get; set; }
 
-        public virtual Companies Companies { get; set; }
-        public virtual ICollection<Transactions> Transactions { get; set; }
-
+        
 
     }
 }

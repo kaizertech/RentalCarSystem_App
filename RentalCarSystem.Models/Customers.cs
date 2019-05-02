@@ -9,10 +9,7 @@ namespace RentalCarSystem.Models
 {
     public class Customers
     {
-        public Customers()
-        {
-            this.Transactions = new List<Transactions>();
-        }
+        
         [Key]
         public int Musteri_ID { get; set; }
 
@@ -26,7 +23,7 @@ namespace RentalCarSystem.Models
 
         public string Musteri_Sifre { get; set; }
 
-        public virtual ICollection<Transactions> Transactions { get; set; }
+        
 
         
     }
