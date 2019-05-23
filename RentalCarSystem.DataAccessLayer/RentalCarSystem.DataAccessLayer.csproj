@@ -48,10 +48,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomerContext.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="RentACarContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Abstractions\ICarRepository.cs" />
+    <Compile Include="Repositories\Abstractions\ICartrackingRepository.cs" />
+    <Compile Include="Repositories\Abstractions\ICompanyRepository.cs" />
+    <Compile Include="Repositories\Abstractions\ICustomerRepository.cs" />
+    <Compile Include="Repositories\Abstractions\IPersonRepository.cs" />
+    <Compile Include="Repositories\Abstractions\IRentalRepository.cs" />
     <Compile Include="Repositories\Abstractions\IRepository.cs" />
+    <Compile Include="Repositories\Abstractions\IRoleRepository.cs" />
+    <Compile Include="Repositories\Abstractions\ISpendingRepository.cs" />
+    <Compile Include="Repositories\Abstractions\ISpendingTypeRepository.cs" />
+    <Compile Include="Repositories\Abstractions\IUserRepository.cs" />
+    <Compile Include="Repositories\Concrates\CarRepository.cs" />
+    <Compile Include="Repositories\Concrates\CartrackingRepository.cs" />
+    <Compile Include="Repositories\Concrates\CompanyRepository.cs" />
+    <Compile Include="Repositories\Concrates\CustomerRepository.cs" />
+    <Compile Include="Repositories\Concrates\PersonRepository.cs" />
+    <Compile Include="Repositories\Concrates\RentalRepository.cs" />
     <Compile Include="Repositories\Concrates\Repository.cs" />
+    <Compile Include="Repositories\Concrates\RoleRepository.cs" />
+    <Compile Include="Repositories\Concrates\SpendingRepository.cs" />
+    <Compile Include="Repositories\Concrates\SpendingTypeRepository.cs" />
+    <Compile Include="Repositories\Concrates\UserRepository.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -42,12 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseEntitiy.cs" />
-    <Compile Include="Cars.cs" />
-    <Compile Include="Companies.cs" />
-    <Compile Include="Customers.cs" />
+    <Compile Include="Car.cs" />
+    <Compile Include="Cartracking.cs" />
+    <Compile Include="Company.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transactions.cs" />
+    <Compile Include="Rental.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="Spending.cs" />
+    <Compile Include="SpendingType.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

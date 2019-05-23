@@ -52,8 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstactions\IUnitOfWork.cs" />
-    <Compile Include="Concretes\UnitOfWork.cs" />
+    <Compile Include="Concretes\CarBusiness.cs" />
+    <Compile Include="Concretes\CustomerBusiness.cs" />
+    <Compile Include="Concretes\PersonBusiness.cs" />
+    <Compile Include="Concretes\RentBusiness.cs" />
+    <Compile Include="Concretes\UserBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,5 +69,6 @@
       <Name>RentalCarSystem.DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
